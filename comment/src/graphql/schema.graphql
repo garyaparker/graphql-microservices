@@ -1,0 +1,9 @@
+type Query {
+  comment(id: ID!): Comment
+}
+
+type Comment {
+  id: ID!
+  authorId: ID!
+  message: String!
+}

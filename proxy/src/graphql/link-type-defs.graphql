@@ -1,0 +1,19 @@
+extend type Blog {
+  posts: [Post]
+  author: User
+  contributers: [User]
+}
+
+extend type Post {
+  blog: Blog
+  comments: [Comment]
+}
+
+extend type Comment {
+  author: User
+}
+
+extend type User {
+  blogsAuthored: [Blog]
+  blogsContributed: [Blog]
+}

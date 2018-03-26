@@ -1,0 +1,13 @@
+type Query {
+  post(id: ID!): Post
+}
+
+type Post {
+  id: ID!
+  blogId: ID!
+  commentIds: [ID]
+  title: String!
+  body: String!
+  createdAt: String!
+  updatedAt: String
+}

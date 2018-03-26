@@ -1,0 +1,13 @@
+type Query {
+  blog(id: ID!): Blog
+}
+
+type Blog {
+  id: ID!
+  title: String!
+  authorId: ID
+  contributerIds: [ID]
+  createdAt: String!
+  updatedAt: String
+  postIds: [ID]
+}

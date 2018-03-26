@@ -1,0 +1,38 @@
+export default [
+  {
+    id: '1',
+    blogId: '1',
+    commentIds: ['1'],
+    title: 'What to Do When the Kitchen is on Fire',
+    body: 'This is a story, all about how my life twisted upside down.',
+    createdAt: '2/3/2018',
+    updatedAt: null,
+  },
+  {
+    id: '2',
+    blogId: '1',
+    commentIds: ['2'],
+    title: 'Making Sushi by Hand',
+    body: 'This is a story, all about how my life twisted upside down.',
+    createdAt: '2/3/2018',
+    updatedAt: null,
+  },
+  {
+    id: '3',
+    blogId: '2',
+    commentIds: ['3', '4'],
+    title: 'Making Text Blink',
+    body: 'Blinking text is a sure fire way to attrack a reader\'s attention to content.',
+    createdAt: '3/1/2018',
+    updatedAt: '3/3/2018',
+  },
+  {
+    id: '4',
+    blogId: '2',
+    commentIds: [],
+    title: 'Why Styling Just Gets in the Way',
+    body: 'Do not use css. Plain text aligned with tables is all any web pages needs.',
+    createdAt: '2/3/2018',
+    updatedAt: null,
+  },
+];
