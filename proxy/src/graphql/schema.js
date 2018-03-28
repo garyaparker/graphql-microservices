@@ -3,33 +3,21 @@ import { createApolloFetch } from 'apollo-fetch';
 import linkTypeDefs from './link-type-defs.graphql';
 import resolvers from './resolvers';
 
+const fetchSchema = async (uri) => {
+  const fetcher = createApolloFetch({ uri });
+  return makeRemoteExecutableSchema({ fetcher, schema: await introspectSchema(fetcher) });
+};
+
 export default async () => {
-  const blogFetcher = createApolloFetch({ uri: 'http://localhost:3001/graphql' });
-  const blogSchema = makeRemoteExecutableSchema({
-    schema: await introspectSchema(blogFetcher),
-    fetcher: blogFetcher,
-  });
+  const graphqlEndpoints = [
+    'http://localhost:3001/graphql',
+    'http://localhost:3002/graphql',
+    'http://localhost:3003/graphql',
+    'http://localhost:3004/graphql',
+  ];
 
-  const postFetcher = createApolloFetch({ uri: 'http://localhost:3002/graphql' });
-  const postSchema = makeRemoteExecutableSchema({
-    schema: await introspectSchema(postFetcher),
-    fetcher: postFetcher,
-  });
+  const remoteSchemas = await Promise.all(graphqlEndpoints.map(fetchSchema));
+  const schemas = [linkTypeDefs, ...remoteSchemas];
 
-  const userFetcher = createApolloFetch({ uri: 'http://localhost:3003/graphql' });
-  const userSchema = makeRemoteExecutableSchema({
-    schema: await introspectSchema(userFetcher),
-    fetcher: userFetcher,
-  });
-
-  const commentFetcher = createApolloFetch({ uri: 'http://localhost:3004/graphql' });
-  const commentSchema = makeRemoteExecutableSchema({
-    schema: await introspectSchema(commentFetcher),
-    fetcher: commentFetcher,
-  });
-
-  return mergeSchemas({
-    schemas: [blogSchema, postSchema, userSchema, commentSchema, linkTypeDefs],
-    resolvers,
-  });
+  return mergeSchemas({ schemas, resolvers });
 };
